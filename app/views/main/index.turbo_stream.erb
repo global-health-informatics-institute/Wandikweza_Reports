@@ -1,0 +1,12 @@
+
+<%= turbo_stream.update "report_content" do %>
+  <% if @selected_report == "Daily Cash" %>
+    <%= render partial: "daily_summary_report", locals: {selected_report: @selected_report} %>
+  <% elsif @selected_report == "Cashier" %>
+    <%= render partial: "census_report", locals: {selected_report: @selected_report} %>
+  <% elsif @selected_report == 'Income' %>
+    <%= render partial: "income_summary_report", locals: {selected_report: @selected_report} %>
+  <% elsif @selected_report == 'Census' %>
+    <%= render partial: "census_report", locals: {selected_report: @selected_report} %>
+  <% end %>
+<% end %>

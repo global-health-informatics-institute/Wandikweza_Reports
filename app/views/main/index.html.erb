@@ -1,0 +1,54 @@
+<%= javascript_include_tag 'custom/jquery-3.6.1.min', 'data-turbolinks-track' => false %>
+
+<p class="h5 ">Reports Center</p>
+<div class="border p-2">
+  <h6>Report Specification</h6>
+  <%= form_tag(generate_report_path, method: "GET") do %>
+    <div class="row pt-2 pb-2">
+      <div class="col-2 fs-7 fw-bold">
+        Report Type:
+      </div>
+      <div class="col">
+        <%= select_tag(:report_type, options_for_select(select_report), class: "form-select", id:"reportTypeSelect") %>
+      </div>
+      <div class="col-2 fs-7 fw-bold">
+        Report Period Start:
+      </div>
+      <div class="col">
+        <%= date_field_tag(:start_date, Date.today,required: true)%>
+      </div>
+      <div class="col-2">
+        <%= submit_tag("Generate Report", class: "btn btn-success") %>
+      </div>
+    </div>
+    <div class="row pt-2 pb-2">
+      <div class="col-2 fs-5 fw-bold">
+        &nbsp;
+      </div>
+      <div class="col">
+        <div id="employeeLOElist" style="display: none;">
+          <%#= select_tag(:employee_loe_type, options_for_select(employees_LOE_list), class: "form-select mt-2", id: "employeeLOESelect") %>
+        </div>
+        <%#= hidden_field_tag(:selected_employee_id, "", id: "selected_employee_id") %>
+      </div>
+      <div class="col-2 fs-7 fw-bold">
+        Report Period End:
+      </div>
+      <div class="col">
+        <%= date_field_tag(:end_date, Date.today,required: true) %>
+      </div>
+      <div class="col-2">
+        &nbsp;
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="border p-2 mt-2">
+  <%#= render partial: "main/daily_summary_report" %>
+  <%= turbo_stream_from "main" %>
+
+  <div id="report_content">
+    <%= render partial: "index" %>
+  </div>
+</div>
