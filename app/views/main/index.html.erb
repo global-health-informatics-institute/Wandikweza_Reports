@@ -3,7 +3,7 @@
 <p class="h5 ">Reports Center</p>
 <div class="border p-2">
   <h6>Report Specification</h6>
-  <%= form_tag(generate_report_path, method: "GET") do %>
+  <%= form_tag(generate_report_path, method: "GET", data:{turbo_frame: "report_content"}) do %>
     <div class="row pt-2 pb-2">
       <div class="col-2 fs-7 fw-bold">
         Report Type:
@@ -45,10 +45,10 @@
 </div>
 
 <div class="border p-2 mt-2">
-  <%#= render partial: "main/daily_summary_report" %>
   <%= turbo_stream_from "main" %>
 
-  <div id="report_content">
+  <%= turbo_frame_tag "report_content" do %>
+    <!-- This is where the report will be dynamically updated -->
     <%= render partial: "index" %>
-  </div>
+  <% end %>
 </div>
