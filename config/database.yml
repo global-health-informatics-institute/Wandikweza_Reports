@@ -5,22 +5,22 @@
 #   gem "sqlite3"
 #
 default: &default
-  adapter: sqlite3
+  adapter: mysql2
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  username: username
+  username: root
   password: password
 
 development:
   <<: *default
-  database: wandikweza_live
+  database: wandikweza_on
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: wandikweza_live
+  database: wandikweza_on
 
 
 # SQLite3 write its data on the local filesystem, as such it requires

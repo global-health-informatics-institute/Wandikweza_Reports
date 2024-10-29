@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get "reports/index"
   get "reports/show"
   get "reports/create"
-  get "main/index"
+  #get "main/index"
   get "main/create"
   get "main/destroy"
   root 'main#index'
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   get "generate_report", to: 'main#index', as: "generate_report", defaults: { format: :turbo_stream }
-
+  get 'main/index', to: 'main#index', as: 'main_index'
   # Defines the root path route ("/")
   # root "posts#index"
 end

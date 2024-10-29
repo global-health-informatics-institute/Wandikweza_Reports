@@ -1,0 +1,2 @@
+class OrderEntry < ApplicationRecord
+end

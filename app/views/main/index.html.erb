@@ -1,9 +1,9 @@
 <%= javascript_include_tag 'custom/jquery-3.6.1.min', 'data-turbolinks-track' => false %>
 
-<p class="h5 ">Reports Center</p>
+<p class="h5">Reports Center</p>
 <div class="border p-2">
   <h6>Report Specification</h6>
-  <%= form_tag(generate_report_path, method: "GET", data:{turbo_frame: "report_content"}) do %>
+  <%= form_tag(main_index_path, method: "GET", remote: true, id: "report_form") do %> 
     <div class="row pt-2 pb-2">
       <div class="col-2 fs-7 fw-bold">
         Report Type:
@@ -15,7 +15,7 @@
         Report Period Start:
       </div>
       <div class="col">
-        <%= date_field_tag(:start_date, Date.today,required: true)%>
+        <%= date_field_tag(:start_date, Date.today, required: true) %>
       </div>
       <div class="col-2">
         <%= submit_tag("Generate Report", class: "btn btn-success") %>
@@ -35,7 +35,7 @@
         Report Period End:
       </div>
       <div class="col">
-        <%= date_field_tag(:end_date, Date.today,required: true) %>
+        <%= date_field_tag(:end_date, Date.today, required: true) %>
       </div>
       <div class="col-2">
         &nbsp;
@@ -45,10 +45,20 @@
 </div>
 
 <div class="border p-2 mt-2">
-  <%= turbo_stream_from "main" %>
-
   <%= turbo_frame_tag "report_content" do %>
-    <!-- This is where the report will be dynamically updated -->
-    <%= render partial: "index" %>
+    <!-- Dynamically render the partial based on the controller logic -->
+    <%= render partial: @partial %>
   <% end %>
 </div>
+
+
+# <script type="text/javascript">
+#   document.addEventListener('turbolinks:load', function() {
+#     var reportSelect = document.getElementById("reportTypeSelect");
+#     if (reportSelect) {
+#       reportSelect.addEventListener("change", function() {
+#         document.getElementById("report_form").submit();
+#       });
+#     }
+#   });
+# </script>
