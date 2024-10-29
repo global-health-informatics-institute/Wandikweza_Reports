@@ -7,6 +7,8 @@ module MainHelper
     ]
     return options
   end
-
+  # def cashier_list
+  #   #user = User.select(person_id)
+  # end
   
 end

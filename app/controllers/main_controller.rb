@@ -2,9 +2,11 @@
 class MainController < ApplicationController
   def index
     #range = DateTime.now.beginning_of_day..DateTime.now.end_of_day
-    range = DateTime.parse(params[:start_date]).beginning_of_day..DateTime.parse(params[:end_date]).end_of_day
-    
-    
+    # range = DateTime.parse(params[:start_date]).beginning_of_day..DateTime.parse(params[:end_date]).end_of_day
+  start_date = params[:start_date] ? DateTime.parse(params[:start_date]).beginning_of_day : DateTime.now.beginning_of_day
+  end_date = params[:end_date] ? DateTime.parse(params[:end_date]).end_of_day : DateTime.now.end_of_day
+
+  range = start_date..end_date
     #start_time = DateTime.now.beginning_of_day
     #end_time = DateTime.now.end_of_day
     @collected = OrderPayment.select("COALESCE(sum(amount)) as amount").where(created_at: range).first.amount rescue 0
